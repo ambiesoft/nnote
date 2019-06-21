@@ -23,7 +23,7 @@ async function getPage() {
   return page
 }
 
-
+var bOn=false
 async function main() {
   getPage()
     .then(page => {
@@ -33,7 +33,12 @@ async function main() {
         terminal: false
       });
 
-      rl.on('line', async function (line) {
+      if(!bOn) {
+        bOn=true
+      rl.on('line',aaa )
+      }
+
+      async function aaa(line) {
         // console.log(line);
         // let page = await getPage()
         let preElement = await page.$('pre')
@@ -45,9 +50,7 @@ async function main() {
         await page.evaluate((pre, all) => {
           pre.innerText = all
         }, preElement, all);
-      })
-
-
+      }
     })
 
 
